@@ -1,253 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Anjan Patel — Mechanical Engineering Technologist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Clash+Display:wght@700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #080d14;
-      --surface: #0e1520;
-      --border: #1e2d42;
-      --accent: #3b82f6;
-      --accent2: #60a5fa;
-      --text: #dde6f0;
-      --muted: #6b82a0;
-      --heading: 'Bebas Neue', sans-serif;
-      --body: 'DM Sans', sans-serif;
-      --mono: 'DM Mono', monospace;
+      --bg:       #050810;
+      --bg1:      #090d1a;
+      --bg2:      #0f1525;
+      --bg3:      #162035;
+      --blue:     #4f8ef7;
+      --blue2:    #7ab0ff;
+      --blue-dim: rgba(79,142,247,0.1);
+      --border:   rgba(255,255,255,0.08);
+      --text:     #e2e8f0;
+      --text2:    #94a3b8;
+      --font-main: 'Space Grotesk', sans-serif;
+      --font-head: 'Clash Display', sans-serif;
+      --font-mono: 'Space Mono', monospace;
     }
 
-    html { scroll-behavior: smooth; }
-
     body {
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
-      font-family: var(--body);
-      font-weight: 300;
-      line-height: 1.7;
+      font-family: var(--font-main);
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* TYPOGRAPHY */
-    h1, h2, h3 { font-family: var(--heading); letter-spacing: 0.05em; line-height: 1.1; }
-    .mono { font-family: var(--mono); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--accent); }
+    /* GRID BACKGROUND */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -1;
+      opacity: 0.3;
+    }
 
-    /* LAYOUT */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-    section { padding: 8rem 0; border-bottom: 1px solid var(--border); }
 
-    /* NAV */
+    /* NAVBAR */
     nav {
       position: fixed;
       top: 0; width: 100%;
       padding: 1.5rem 0;
-      background: rgba(8, 13, 20, 0.8);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
+      background: rgba(5, 8, 16, 0.8);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      z-index: 1000;
     }
-    .nav-content { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: var(--heading); font-size: 1.5rem; text-decoration: none; color: var(--text); }
-    .nav-links { display: flex; gap: 3rem; }
-    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a { text-decoration: none; color: var(--text2); font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+    .nav-links a:hover { color: var(--blue); }
 
-    /* HERO & PROFILE STYLE SYNC */
-    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 4rem; }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    /* HERO SECTION */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
 
-    .profile-wrap {
-      position: relative;
-      width: 380px;
-      height: 380px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: auto;
-    }
-
-    .profile-hex-ring {
-      position: absolute;
-      inset: -15px;
-      border: 2px solid var(--accent);
-      opacity: 0.3;
-      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      animation: rotateRing 20s linear infinite;
-    }
-
-    @keyframes rotateRing {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .profile-photo {
-      width: 350px;
-      height: 350px;
-      object-fit: cover;
-      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      filter: grayscale(20%) contrast(1.1);
-      border: 1px solid var(--border);
-      z-index: 2;
-    }
-
-    .hero-title { font-size: 7rem; margin: 1rem 0; }
-    .hero-tag { font-size: 1.2rem; color: var(--muted); margin-bottom: 2rem; max-width: 500px; }
+    .hero-pre { font-family: var(--font-mono); color: var(--blue); font-size: 0.9rem; margin-bottom: 1rem; }
+    .hero-title { font-family: var(--font-head); font-size: clamp(3rem, 8vw, 6rem); line-height: 0.95; margin-bottom: 1.5rem; }
+    .hero-desc { font-size: 1.25rem; color: var(--text2); max-width: 550px; margin-bottom: 2rem; }
     
     .hero-motto {
-      font-family: var(--mono);
-      color: var(--accent2);
-      font-size: 0.9rem;
-      margin-top: 1rem;
-      border-left: 2px solid var(--accent);
+      font-family: var(--font-mono);
+      color: var(--blue2);
+      font-size: 0.85rem;
+      border-left: 2px solid var(--blue);
       padding-left: 1.5rem;
+      margin-bottom: 3rem;
       letter-spacing: 0.05em;
     }
 
-    /* UPDATED HERO STATS (Removed 200 uni/month) */
-    .hero-stats { display: flex; gap: 4rem; margin-top: 4rem; border-top: 1px solid var(--border); padding-top: 2rem; }
-    .stat-num { font-family: var(--heading); font-size: 2.5rem; color: var(--accent); }
-    .stat-label { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+    /* STATS (Removed 200 uni/month) */
+    .stats { display: flex; gap: 4rem; margin-bottom: 2rem; }
+    .stat-item .val { font-family: var(--font-head); font-size: 3rem; color: #fff; line-height: 1; }
+    .stat-item .lab { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text2); margin-top: 0.5rem; }
 
-    /* PROJECTS */
-    .section-head { margin-bottom: 4rem; }
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .project-card { background: var(--surface); border: 1px solid var(--border); padding: 3rem; position: relative; overflow: hidden; transition: 0.4s; }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-    .project-card h3 { font-size: 2.5rem; margin: 1rem 0; }
-    .project-tags { display: flex; gap: 1rem; margin-top: 2rem; }
-    .tag { font-family: var(--mono); font-size: 0.65rem; padding: 0.4rem 0.8rem; border: 1px solid var(--border); color: var(--muted); }
-
-    /* CONTACT */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .contact-link { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); transition: 0.3s; }
-    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
-    .cl-label { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
-
-    footer { padding: 4rem 0; border-top: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--muted); }
-
-    @media (max-width: 968px) {
-      .hero-grid, .project-grid, .contact-grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: 4rem; }
-      .profile-wrap { margin: 0 auto; width: 300px; height: 300px; }
-      .profile-photo { width: 280px; height: 280px; }
+    /* PROFILE PICTURE WITH ANIMATED RINGS */
+    .profile-area { position: relative; display: flex; justify-content: center; align-items: center; }
+    
+    .profile-wrap {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-  </style>
-</head>
-<body>
 
-  <nav>
-    <div class="container nav-content">
-      <a href="#" class="logo">ANJAN PATEL</a>
-      <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </nav>
+    .ring {
+      position: absolute;
+      border: 1.5px solid var(--blue);
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: rotateRing 20s linear infinite;
+    }
+    .ring-1 { inset: -10px; border-style: dashed; }
+    .ring-2 { inset: -25px; opacity: 0.1; animation-duration: 30s; animation-direction: reverse; }
 
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <p class="mono">Mechanical Engineering Technologist</p>
-        <h1 class="hero-title">PRECISION<br/>SYSTEMS</h1>
-        <p class="hero-tag">Specializing in mechanical design and technical engineering solutions based in Edmonton, Alberta.</p>
-        
-        <p class="hero-motto">PRECISION IN DESIGN, EXCELLENCE IN EXECUTION.</p>
+    @keyframes rotateRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-num">05+</div>
-            <div class="stat-label">Years Exp.</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">50+</div>
-            <div class="stat-label">Projects</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="profile-wrap">
-        <div class="profile-hex-ring"></div>
-        <img src="profile.jpg" alt="Anjan Patel" class="profile-photo">
-      </div>
-    </div>
-  </section>
+    .profile-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--bg2);
+      box-shadow: 0 0 50px rgba(79,142,247,0.15);
+      z-index: 2;
+    }
 
-  <section id="work">
-    <div class="container">
-      <div class="section-head">
-        <p class="mono">Selected Projects</p>
-        <h2>Engineering Portfolio</h2>
-      </div>
-      <div class="project-grid">
-        <div class="project-card">
-          <p class="mono">01 / Mechanical Design</p>
-          <h3>PIPELINE<br/>SYSTEMS</h3>
-          <p>Advanced stress analysis and structural design for high-pressure oil and gas transport infrastructure.</p>
-          <div class="project-tags">
-            <span class="tag">AutoCAD</span>
-            <span class="tag">SolidWorks</span>
-            <span class="tag">ASME</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <p class="mono">02 / Industrial Tech</p>
-          <h3>VERTEX<br/>ENGINEERING</h3>
-          <p>Developing specialized mechanical components and technical workflows for industrial efficiency.</p>
-          <div class="project-tags">
-            <span class="tag">Design</span>
-            <span class="tag">Drafting</span>
-            <span class="tag">O&G</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    /* PROJECT CARDS */
+    .section-label { font-family: var(--font-mono); color: var(--blue); font-size: 0.8rem; margin-bottom: 1rem; display: block; }
+    .section-title { font-family: var(--font-head); font-size: 3.5rem; margin-bottom: 4rem; }
+    
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .card { 
+      background: var(--bg1); 
+      border: 1px solid var(--border); 
+      padding: 3rem; 
+      border-radius: 24px; 
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover { border-color: var(--blue); transform: translateY(-5px); background: var(--bg2); }
+    .card h3 { font-family: var(--font-head); font-size: 2.5rem; margin-bottom: 1rem; }
+    .card p { color: var(--text2); margin-bottom: 2rem; }
 
-  <section id="contact">
-    <div class="container contact-grid">
-      <div>
-        <p class="mono">Get in Touch</p>
-        <h2 style="font-size: 4rem;">LET'S BUILD<br/>SOMETHING.</h2>
-      </div>
-      <div>
-        <div class="contact-links">
-          <a href="mailto:anjan@anjanpatel.ca" class="contact-link">
-            <span class="cl-label">Email</span>
-            <span class="cl-value">anjan@anjanpatel.ca</span>
-            <span class="cl-arrow">↗</span>
-          </a>
-          <a href="https://linkedin.com/in/patelanjan" target="_blank" class="contact-link">
-            <span class="cl-label">LinkedIn</span>
-            <span class="cl-value">linkedin.com/in/patelanjan</span>
-            <span class="cl-arrow">↗</span>
-          </a>
-          <a href="https://x.com/anjanpatel_" target="_blank" class="contact-link">
-            <span class="cl-label">X (Twitter)</span>
-            <span class="cl-value">@anjanpatel_</span>
-            <span class="cl-arrow">↗</span>
-          </a>
-          <div class="contact-link" style="cursor:default;">
-            <span class="cl-label">Location</span>
-            <span class="cl-value">Edmonton, Alberta</span>
-            <span class="cl-arrow" style="opacity:0.3;">—</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <p>© 2026 Anjan Patel — Mechanical Engineering Technologist</p>
-      <p>anjanpatel.ca</p>
-    </div>
-  </footer>
-
-</body>
-</html>
+    /* CONTACT AREA */
+    .contact-card {
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      border: 1px solid var(--border);
+      padding: 5rem;
+      border-radius: 40px;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      padding: 1.2rem 2.5rem;
