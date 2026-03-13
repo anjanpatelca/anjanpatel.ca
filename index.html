@@ -27,8 +27,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-logo{display:flex;align-items:center;text-decoration:none;}
 .logo-icon{width:38px;height:38px;flex-shrink:0;}
 .nav-links{display:flex;gap:2.2rem;list-style:none;}
-.nav-links a{font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:2.5px;color:var(--steel);text-decoration:none;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:var(--cyan);}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:2.5px;color:var(--steel);text-decoration:none;text-transform:uppercase;transition:color .2s,border-bottom .2s;padding-bottom:.2rem;border-bottom:1px solid transparent;}
+.nav-links a:hover{color:var(--cyan);border-bottom:1px solid var(--cyan);}
 .nav-resume{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);border:1px solid var(--cyan);padding:.42rem 1.1rem;text-decoration:none;transition:background .2s,color .2s;}
 .nav-resume:hover{background:var(--cyan);color:var(--bg);}
 
@@ -147,7 +147,7 @@ footer p{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:
 
 /* RESPONSIVE */
 @media(max-width:960px){
-  nav{padding:1rem 1.5rem;} .nav-links{display:none;}
+  nav{padding:1rem 1.5rem;} .nav-links{gap:1.1rem;} .nav-links a{font-size:.55rem;letter-spacing:1.5px;}
   section,.certs-strip{padding-left:1.5rem;padding-right:1.5rem;}
   #about,#contact{grid-template-columns:1fr;}
   .hero-content{grid-template-columns:1fr;padding:0 1.5rem;}
@@ -338,7 +338,7 @@ footer p{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:
     <p>Open to new engineering opportunities, technical collaborations or project discussions. Based in Edmonton — available across Alberta.</p>
     <div class="cls">
       <!-- All links are directly clickable -->
-      <a href="mailto:anjan@anjanpatel.ca" class="cl"><span class="cdot"></span>anjan@anjanpatel.ca</a>
+      <a href="/cdn-cgi/l/email-protection#3756595d56597756595d5659475643525b195456" class="cl"><span class="cdot"></span><span class="__cf_email__" data-cfemail="e687888c8788a687888c8788968792838ac88587">[email&#160;protected]</span></a>
       <a href="tel:+18254617909" class="cl"><span class="cdot"></span>+1 (825) 461-7909</a>
       <a href="https://www.linkedin.com/in/patelanjan" target="_blank" rel="noopener" class="cl"><span class="cdot"></span>linkedin.com/in/patelanjan</a>
       <a href="https://anjanpatel.ca" target="_blank" class="cl"><span class="cdot"></span>anjanpatel.ca</a>
@@ -370,7 +370,7 @@ footer p{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:
       <div class="form-success" id="form-success">
         ✓ Message sent! Anjan will be in touch soon.
       </div>
-      <p class="fn">// Or reach out directly: <a href="mailto:anjan@anjanpatel.ca">anjan@anjanpatel.ca</a></p>
+      <p class="fn">// Or reach out directly: <a href="/cdn-cgi/l/email-protection#cfaea1a5aea18faea1a5aea1bfaebbaaa3e1acae"><span class="__cf_email__" data-cfemail="4726292d26290726292d2629372633222b692426">[email&#160;protected]</span></a></p>
     </form>
   </div>
 </section>
@@ -391,130 +391,118 @@ footer p{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:
   <div style="width:28px"></div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
 // CURSOR
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+const cur=document.getElementById(‘cur’),ring=document.getElementById(‘cur-ring’);
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+document.addEventListener(‘mousemove’,e=>{mx=e.clientX;my=e.clientY;});
 (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;cur.style.transform=`translate(${mx-4}px,${my-4}px)`;ring.style.transform=`translate(${rx-15}px,${ry-15}px)`;requestAnimationFrame(loop);})();
 
 // LOGO SLOW SPIN
-let lr=0;const lsvg=document.getElementById('lsvg');
+let lr=0;const lsvg=document.getElementById(‘lsvg’);
 setInterval(()=>{lr+=.18;lsvg.style.transform=`rotate(${lr}deg)`;},50);
 
 // FORMSPREE CONTACT FORM
-document.getElementById('contact-form').addEventListener('submit',async function(e){
-  e.preventDefault();
-  const btn=document.getElementById('submit-btn');
-  const success=document.getElementById('form-success');
-  btn.textContent='Sending...';
-  btn.disabled=true;
-  try{
-    const res=await fetch('https://formspree.io/f/xbdzkddl',{
-      method:'POST',
-      headers:{'Accept':'application/json'},
-      body:new FormData(this)
-    });
-    if(res.ok){
-      success.classList.add('show');
-      this.reset();
-      btn.textContent='✓ Sent!';
-      btn.style.background='#1a6a3a';
-      setTimeout(()=>{
-        btn.textContent='Send Message →';
-        btn.style.background='';
-        btn.disabled=false;
-        success.classList.remove('show');
-      },5000);
-    } else {
-      btn.textContent='Error — Try Again';
-      btn.style.background='#6a1a1a';
-      btn.disabled=false;
-      setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';},3000);
-    }
-  } catch(err){
-    btn.textContent='Error — Try Again';
-    btn.style.background='#6a1a1a';
-    btn.disabled=false;
-    setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';},3000);
-  }
+document.getElementById(‘contact-form’).addEventListener(‘submit’,async function(e){
+e.preventDefault();
+const btn=document.getElementById(‘submit-btn’);
+const success=document.getElementById(‘form-success’);
+btn.textContent=‘Sending…’;
+btn.disabled=true;
+try{
+const res=await fetch(‘https://formspree.io/f/xbdzkddl’,{
+method:‘POST’,
+headers:{‘Accept’:‘application/json’},
+body:new FormData(this)
+});
+if(res.ok){
+success.classList.add(‘show’);
+this.reset();
+btn.textContent=‘✓ Sent!’;
+btn.style.background=’#1a6a3a’;
+setTimeout(()=>{
+btn.textContent=‘Send Message →’;
+btn.style.background=’’;
+btn.disabled=false;
+success.classList.remove(‘show’);
+},5000);
+} else {
+btn.textContent=‘Error — Try Again’;
+btn.style.background=’#6a1a1a’;
+btn.disabled=false;
+setTimeout(()=>{btn.textContent=‘Send Message →’;btn.style.background=’’;},3000);
+}
+} catch(err){
+btn.textContent=‘Error — Try Again’;
+btn.style.background=’#6a1a1a’;
+btn.disabled=false;
+setTimeout(()=>{btn.textContent=‘Send Message →’;btn.style.background=’’;},3000);
+}
 });
 
 // HERO THREE.JS
 (function(){
-  const c=document.getElementById('hero-canvas');
-  const r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
-  r.setPixelRatio(Math.min(devicePixelRatio,2));
-  const s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,2,.1,100);
-  cam.position.z=6;
-  function rs(){const w=c.clientWidth,h=c.clientHeight||innerHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
-  rs();window.addEventListener('resize',rs);
-  const mc=new THREE.MeshBasicMaterial({color:0x00c8e8,wireframe:true,transparent:true,opacity:.28});
-  const mb=new THREE.MeshBasicMaterial({color:0x1e6fa8,wireframe:true,transparent:true,opacity:.18});
-  const gl=[
-    new THREE.TorusGeometry(.7,.05,8,36),new THREE.TorusGeometry(1.1,.04,6,48),
-    new THREE.BoxGeometry(.22,.22,.22),new THREE.OctahedronGeometry(.18),
-    new THREE.CylinderGeometry(.04,.04,.9,8),new THREE.CylinderGeometry(.1,.1,.04,20)
-  ];
-  const sh=[];
-  for(let i=0;i<22;i++){
-    const m=new THREE.Mesh(gl[i%gl.length].clone(),i%3===0?mb:mc);
-    m.position.set((Math.random()-.5)*14,(Math.random()-.5)*8,(Math.random()-.5)*5-2);
-    m.rotation.set(Math.random()*Math.PI*2,Math.random()*Math.PI*2,0);
-    m.userData={rx:(Math.random()-.5)*.007,ry:(Math.random()-.5)*.009,fy:Math.random()*6.28,fs:.002+Math.random()*.004};
-    s.add(m);sh.push(m);
-  }
-  const pp=new Float32Array(400*3);
-  for(let i=0;i<pp.length;i++)pp[i]=(Math.random()-.5)*22;
-  const pg=new THREE.BufferGeometry();
-  pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
-  s.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x00c8e8,size:.012,transparent:true,opacity:.3})));
-  let t=0,mox=0,moy=0;
-  document.addEventListener('mousemove',e=>{mox=(e.clientX/innerWidth-.5)*1.5;moy=(e.clientY/innerHeight-.5)*1;});
-  (function a(){requestAnimationFrame(a);t+=.01;
-    sh.forEach(x=>{x.rotation.x+=x.userData.rx;x.rotation.y+=x.userData.ry;x.position.y+=Math.sin(t*x.userData.fs+x.userData.fy)*.0015;});
-    cam.position.x+=(mox-cam.position.x)*.025;
-    cam.position.y+=(-moy-cam.position.y)*.025;
-    r.render(s,cam);
-  })();
+const c=document.getElementById(‘hero-canvas’);
+const r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
+r.setPixelRatio(Math.min(devicePixelRatio,2));
+const s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,2,.1,100);
+cam.position.z=6;
+function rs(){const w=c.clientWidth,h=c.clientHeight||innerHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+rs();window.addEventListener(‘resize’,rs);
+const mc=new THREE.MeshBasicMaterial({color:0x00c8e8,wireframe:true,transparent:true,opacity:.28});
+const mb=new THREE.MeshBasicMaterial({color:0x1e6fa8,wireframe:true,transparent:true,opacity:.18});
+const gl=[
+new THREE.TorusGeometry(.7,.05,8,36),new THREE.TorusGeometry(1.1,.04,6,48),
+new THREE.BoxGeometry(.22,.22,.22),new THREE.OctahedronGeometry(.18),
+new THREE.CylinderGeometry(.04,.04,.9,8),new THREE.CylinderGeometry(.1,.1,.04,20)
+];
+const sh=[];
+for(let i=0;i<22;i++){
+const m=new THREE.Mesh(gl[i%gl.length].clone(),i%3===0?mb:mc);
+m.position.set((Math.random()-.5)*14,(Math.random()-.5)*8,(Math.random()-.5)*5-2);
+m.rotation.set(Math.random()*Math.PI*2,Math.random()*Math.PI*2,0);
+m.userData={rx:(Math.random()-.5)*.007,ry:(Math.random()-.5)*.009,fy:Math.random()*6.28,fs:.002+Math.random()*.004};
+s.add(m);sh.push(m);
+}
+const pp=new Float32Array(400*3);
+for(let i=0;i<pp.length;i++)pp[i]=(Math.random()-.5)*22;
+const pg=new THREE.BufferGeometry();
+pg.setAttribute(‘position’,new THREE.BufferAttribute(pp,3));
+s.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x00c8e8,size:.012,transparent:true,opacity:.3})));
+let t=0,mox=0,moy=0;
+document.addEventListener(‘mousemove’,e=>{mox=(e.clientX/innerWidth-.5)*1.5;moy=(e.clientY/innerHeight-.5)*1;});
+(function a(){requestAnimationFrame(a);t+=.01;
+sh.forEach(x=>{x.rotation.x+=x.userData.rx;x.rotation.y+=x.userData.ry;x.position.y+=Math.sin(t*x.userData.fs+x.userData.fy)*.0015;});
+cam.position.x+=(mox-cam.position.x)*.025;
+cam.position.y+=(-moy-cam.position.y)*.025;
+r.render(s,cam);
+})();
 })();
 
 // ABOUT THREE.JS
 (function(){
-  const c=document.getElementById('about-canvas');
-  const r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
-  r.setPixelRatio(Math.min(devicePixelRatio,2));
-  const s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,100);
-  cam.position.z=4.5;
-  function rs(){const w=c.clientWidth,h=c.clientHeight||400;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
-  rs();window.addEventListener('resize',rs);
-  const g=new THREE.Group();s.add(g);
-  [[1.4,0x1e6fa8,.38],[1.0,0x00c8e8,.55],[.55,0x2e9fd8,.75]].forEach(([rad,col,op])=>{
-    g.add(new THREE.Mesh(new THREE.TorusGeometry(rad,.022,6,64),new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:op})));
-  });
-  for(let i=0;i<12;i++){
-    const a=(i/12)*Math.PI*2;
-    const sp=new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.32,4),new THREE.MeshBasicMaterial({color:0x00c8e8,transparent:true,opacity:.3}));
-    sp.position.set(Math.cos(a)*.78,Math.sin(a)*.78,0);sp.rotation.z=a+Math.PI/2;g.add(sp);
-  }
-  g.add(new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.05,16),new THREE.MeshBasicMaterial({color:0x00c8e8,wireframe:true,transparent:true,opacity:.8})));
-  ['x','y'].forEach(ax=>{
-    const l=new THREE.Mesh(new THREE.CylinderGeometry(.004,.004,2.9,4),new THREE.MeshBasicMaterial({color:0x00c8e8,transparent:true,opacity:.12}));
-    if(ax==='x')l.rotation.z=Math.PI/2;g.add(l);
-  });
-  const ob=[];
-  for(let i=0;i<8;i++){
-    const m=new THREE.Mesh(new THREE.BoxGeometry(.08,.08,.08),new THREE.MeshBasicMaterial({color:0x00c8e8,wireframe:true,transparent:true,opacity:.5}));
-    ob.push({m,o:(i/8)*Math.PI*2});g.add(m);
-  }
-  let t=0;
-  (function a(){requestAnimationFrame(a);t+=.007;
-    g.rotation.z=t*.3;g.children[1].rotation.z=-t*.55;
-    ob.forEach(({m,o})=>{m.position.set(Math.cos(t*.35+o)*1.75,Math.sin(t*.35+o)*1.75,0);m.rotation.x+=.018;m.rotation.y+=.012;});
-    r.render(s,cam);
-  })();
-})();
-</script>
-
-</body>
-</html>
+const c=document.getElementById(‘about-canvas’);
+const r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
+r.setPixelRatio(Math.min(devicePixelRatio,2));
+const s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,100);
+cam.position.z=4.5;
+function rs(){const w=c.clientWidth,h=c.clientHeight||400;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+rs();window.addEventListener(‘resize’,rs);
+const g=new THREE.Group();s.add(g);
+[[1.4,0x1e6fa8,.38],[1.0,0x00c8e8,.55],[.55,0x2e9fd8,.75]].forEach(([rad,col,op])=>{
+g.add(new THREE.Mesh(new THREE.TorusGeometry(rad,.022,6,64),new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:op})));
+});
+for(let i=0;i<12;i++){
+const a=(i/12)*Math.PI*2;
+const sp=new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.32,4),new THREE.MeshBasicMaterial({color:0x00c8e8,transparent:true,opacity:.3}));
+sp.position.set(Math.cos(a)*.78,Math.sin(a)*.78,0);sp.rotation.z=a+Math.PI/2;g.add(sp);
+}
+g.add(new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.05,16),new THREE.MeshBasicMaterial({color:0x00c8e8,wireframe:true,transparent:true,opacity:.8})));
+[‘x’,‘y’].forEach(ax=>{
+const l=new THREE.Mesh(new THREE.CylinderGeometry(.004,.004,2.9,4),new THREE.MeshBasicMaterial({color:0x00c8e8,transparent:true,opacity:.12}));
+if(ax===‘x’)l.rotation.z=Math.PI/2;g.add(l);
+});
+const ob=[];
+for(let i=0;i<8;i++){
+const m=new THREE.Mesh(new THREE.BoxGeometry(.08,.08,.08),new THREE.MeshBasicMaterial({color:0x00c8e8,wireframe:true,transparent
